@@ -1,0 +1,8 @@
+[HttpPost, ActionName("Delete")]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> DeleteConfirmed(long id)
+{
+    var produto = await _context.Product.FindAsync(id);
+    _context.Product.Remove(produto);
+    await _context.SaveChangesAsync();
+    return RedirectToAction(nameof(Index));
