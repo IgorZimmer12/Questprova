@@ -1,0 +1,19 @@
+[HttpGet]
+public async Task<IActionResult> Delete(long? id)
+{
+    if (id == null)
+    {
+        return NotFound("Id Vazio");
+    }
+
+    var produto = await _context.Product
+        .Include(p => p.Fornecedor)
+        .FirstOrDefaultAsync(m => m.Id == id);
+    if (produto == null)
+    {
+        return NotFound("Id Inválido");
+    }
+
+    return View(produto);
+}
+_____________________
